@@ -1,0 +1,38 @@
+h1, h2, h3, h4 {
+}
+div.category {
+    margin-bottom: 0px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+
+#who {
+    background-color: #2E2E2E;
+    color: #f5f5f5;
+}
+#contact {
+    background-color: #2E9AFE;
+}
+#projects {
+    background-color: ghostwhite;
+}
+
+span.hi {
+    color: greenyellow;
+    font-weight: bolder;
+}
+
+.category p {
+    font-size: 1.5em;
+}
+.category b {
+    color: greenyellow;
+    font-weight: bolder;
+}
+
+.project {
+    padding: 10px 100px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

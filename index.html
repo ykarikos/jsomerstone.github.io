@@ -3,17 +3,140 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Home page of Joona Somerkivi alias JSomerstone">
+    <meta name="author" content="Joona Somerkivi">
+
     <title>JSomerstone</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jsomerstone.css" rel="stylesheet">
 
 </head>
 <body>
-    <div class="base">
+
+    <!-- NAVBAR -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
-            <h1>Who?</h1>
-            <p><b>Joona Somerkivi</b> alias <b>JSomerstone</b> - Father and husband, Software engineer & lifestyle programmer, clubber & hobby DJ</p>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#who"><b>JS</b>omerstone</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#who">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#dayswithout">DaysWithout</a></li>
+                            <li><a href="#speedread">SpeedRead.js</a></li>
+                            <li><a href="#whatsup">WhatsUp?</a></li>
+                            <li><a href="#feikkifi">Feikki.fi</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div><!-- /NAVBAR -->
+
+
+    <div class="jumbotron category" id="who" role="main">
+        <div class="container">
+            <h1>Who am I?</h1>
+            <p>
+                Hi, I'm <b>Joona Somerkivi</b> alias <b>JSomerstone</b><br>
+                - A father and husband, software engineer &
+                lifestyle programmer, clubber & hobby DJ
+            </p>
+        </div>
+    </div><!-- /base -->
+    <div class="category" id="contact">
+        <div class="container" >
+            <h1>Contact</h1>
+            <p>I try to be part of quite a lot and give my part to web development. I'm involved in at least following:</p>
+            <div class="row">
+                <div class="col-md-4 project">
+                    <h3>LinkedIn</h3>
+                    <p>
+                        Post-ironic assumenda cillum, put a bird on it before they sold out minim cupidatat Portland
+                        pork belly pug in plaid Pinterest. Selvage selfies consectetur sustainable, cupidatat
+                        letterpress id DIY 8-bit pour-over Odd Future. Photo booth consectetur bitters, readymade
+                        skateboard master cleanse velit quis beard proident elit mixtape aliqua.
+                    </p>
+                </div>
+                <div class="col-md-4 project">
+                    <h3>Twitter</h3>
+                    <p>
+                        Non typewriter
+                        freegan dolore. Reprehenderit incididunt sapiente, synth nisi cornhole tousled locavore aute
+                        vero single-origin coffee slow-carb Marfa. Tumblr hella hoodie deserunt readymade actually.
+                        Vero umami Blue Bottle, church-key food truck DIY cray laboris.
+                    </p>
+                </div>
+                <div class="col-md-4 project">
+                    <h3>Blogspot</h3>
+                    <p>
+                        Crucifix whatever street art Austin hashtag. Commodo art party skateboard fanny pack, sartorial
+                        pop-up labore umami typewriter consectetur. Ennui enim sapiente, High Life cray minim ex cliche
+                        keffiyeh sed aliqua meggings accusamus. Biodiesel swag YOLO Vice, synth asymmetrical quis
+                        bespoke American Apparel proident McSweeney's dreamcatcher kitsch.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="category" id="projects">
+        <div class="container" >
+            <h1>Projects</h1>
+            <p>
+                In addition to my dayjob at <a href="http://solinor.fi">Solinor Oy</a> I have various hobby projects.
+                I've said that even if I would work as a garbage collector <i>I would still</i> do web programming
+                as a hobby.
+            </p>
+
+            <p>
+                Hobby-projects come and go. Some never see the light of day but are dumped. Here is some worth mentioning:
+            </p>
+            <div class="row">
+                <div class="col-md-6 project">
+                    <h3 id="dayswithout">DaysWithout.info</h3>
+                    <p>
+                        <a href="http://dayswithout.info">DaysWithout.info</a> is a day-counter for ... anything. The idea is
+                        that <b>anyone</b> can create a counter for <b>anything</b>.
+                    </p>
+                </div>
+
+                <div class="col-md-6 project">
+                    <h3 id="speedread">SpeedRead.js</h3>
+                    <p>
+                        TODO: Where it can be found, where the idea came from etc.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 project">
+                    <h3 id="whatsup">WhatsUp?</h3>
+                    <p>
+                        <b>Social media</b> and <b>domain</b> search tool.
+                        TODO: Where it can be found, where the idea came from etc.
+                    </p>
+                </div>
+
+                <div class="col-md-6 project">
+                    <h3 id="feikkifi">Feikki.fi</h3>
+                    <p>
+                        <i>Feikki</i> as in <i>fake</i> (in finnish).
+                        TODO:What for, where it can be found, where the idea came from etc.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
