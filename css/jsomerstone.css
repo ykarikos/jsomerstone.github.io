@@ -1,22 +1,32 @@
 h1, h2, h3, h4 {
 }
+a {
+    color: #088A08;
+}
+a:hover {
+    text-decoration: none;
+}
 div.category {
     margin-bottom: 0px;
-    padding-bottom: 50px;
-    padding-top: 50px;
+    padding-top: 20px;
+    padding-bottom: 80px;
 }
 
 #who {
+    padding-top: 80px;
     background-color: #2E2E2E;
     color: #f5f5f5;
 }
 #contact {
-    background-color: #2E9AFE;
+    background-color: #2ECCFA;
 }
 #projects {
     background-color: ghostwhite;
 }
 
+#jsomerstone {
+    color: greenyellow;
+}
 span.hi {
     color: greenyellow;
     font-weight: bolder;
@@ -25,7 +35,7 @@ span.hi {
 .category p {
     font-size: 1.5em;
 }
-.category b {
+.category b{
     color: greenyellow;
     font-weight: bolder;
 }
@@ -34,5 +44,8 @@ span.hi {
     padding: 10px 100px;
     text-align: center;
     margin-top: 20px;
-    margin-bottom: 20px;
+}
+
+p.social i.fa{
+    vertical-align: sub;
 }

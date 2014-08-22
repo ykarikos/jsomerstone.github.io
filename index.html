@@ -10,6 +10,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <link href="css/jsomerstone.css" rel="stylesheet">
 
 </head>
@@ -25,13 +26,32 @@
                 <span class="icon-bar"></span>
             </button>
             <div class="navbar-header">
-                <a class="navbar-brand" href="#who"><b>JS</b>omerstone</a>
+                <a class="navbar-brand" href="#who" id="jsomerstone"><b>JS</b>omerstone</a>
+            </div>
+            <div class="navbar-left hidden-xs">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="https://www.linkedin.com/pub/joona-somerkivi/17/b40/926" target="_blank" title="LinkedIN">
+                            <i class="fa fa-linkedin-square"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://twitter.com/JSomerstone" target="_blank" title="Twitter, @JSomerstone">
+                            <i class="fa fa-twitter-square"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="http://jsomerstone.blogspot.fi" target="_blank" title="JSomerstone.blogspot.fi">
+                            <i class="fa fa-pencil-square "></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div class="navbar-collapse collapse navbar-right">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#who">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li class="active"><a href="#who">About</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
@@ -41,12 +61,13 @@
                             <li><a href="#feikkifi">Feikki.fi</a></li>
                         </ul>
                     </li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
     </div><!-- /NAVBAR -->
 
-
+    <!-- WHO -->
     <div class="jumbotron category" id="who" role="main">
         <div class="container">
             <h1>Who am I?</h1>
@@ -56,47 +77,15 @@
                 lifestyle programmer, clubber & hobby DJ
             </p>
         </div>
-    </div><!-- /base -->
-    <div class="category" id="contact">
-        <div class="container" >
-            <h1>Contact</h1>
-            <p>I try to be part of quite a lot and give my part to web development. I'm involved in at least following:</p>
-            <div class="row">
-                <div class="col-md-4 project">
-                    <h3>LinkedIn</h3>
-                    <p>
-                        Post-ironic assumenda cillum, put a bird on it before they sold out minim cupidatat Portland
-                        pork belly pug in plaid Pinterest. Selvage selfies consectetur sustainable, cupidatat
-                        letterpress id DIY 8-bit pour-over Odd Future. Photo booth consectetur bitters, readymade
-                        skateboard master cleanse velit quis beard proident elit mixtape aliqua.
-                    </p>
-                </div>
-                <div class="col-md-4 project">
-                    <h3>Twitter</h3>
-                    <p>
-                        Non typewriter
-                        freegan dolore. Reprehenderit incididunt sapiente, synth nisi cornhole tousled locavore aute
-                        vero single-origin coffee slow-carb Marfa. Tumblr hella hoodie deserunt readymade actually.
-                        Vero umami Blue Bottle, church-key food truck DIY cray laboris.
-                    </p>
-                </div>
-                <div class="col-md-4 project">
-                    <h3>Blogspot</h3>
-                    <p>
-                        Crucifix whatever street art Austin hashtag. Commodo art party skateboard fanny pack, sartorial
-                        pop-up labore umami typewriter consectetur. Ennui enim sapiente, High Life cray minim ex cliche
-                        keffiyeh sed aliqua meggings accusamus. Biodiesel swag YOLO Vice, synth asymmetrical quis
-                        bespoke American Apparel proident McSweeney's dreamcatcher kitsch.
-                    </p>
-                </div>
-            </div>
-        </div>
     </div>
+    <!-- /WHO -->
+
+    <!-- PROJECTES -->
     <div class="category" id="projects">
         <div class="container" >
             <h1>Projects</h1>
             <p>
-                In addition to my dayjob at <a href="http://solinor.fi">Solinor Oy</a> I have various hobby projects.
+                In addition to my dayjob at <a href="http://solinor.fi" target="_blank">Solinor Oy</a> I have various hobby projects.
                 I've said that even if I would work as a garbage collector <i>I would still</i> do web programming
                 as a hobby.
             </p>
@@ -108,7 +97,7 @@
                 <div class="col-md-6 project">
                     <h3 id="dayswithout">DaysWithout.info</h3>
                     <p>
-                        <a href="http://dayswithout.info">DaysWithout.info</a> is a day-counter for ... anything. The idea is
+                        <a href="http://dayswithout.info" target="_blank">DaysWithout.info</a> is a day-counter for ... anything. The idea is
                         that <b>anyone</b> can create a counter for <b>anything</b>.
                     </p>
                 </div>
@@ -139,6 +128,35 @@
             </div>
         </div>
     </div>
+    <!-- /PROJECTES -->
+
+    <!-- CONTACT -->
+    <div class="category" id="contact">
+        <div class="container">
+            <h1>Contact</h1>
+            <p>I try to be part of quite a lot and give my part to web development. I'm involved in at least following:</p>
+            <p class="social">
+                <i class="fa fa-linkedin-square fa-2x"></i>
+                <a href="https://www.linkedin.com/pub/joona-somerkivi/17/b40/926" target="_blank">Joona Somerkivi</a>
+            </p>
+            <p class="social">
+                <i class="fa fa-twitter-square fa-2x"></i>
+                <a href="https://twitter.com/JSomerstone" target="_blank">@JSomerstone</a>
+            </p>
+            <p class="social">
+                <i class="fa fa-pencil-square fa-2x"></i>
+                <a href="http://jsomerstone.blogspot.fi" target="_blank">JSomerstone.blogspot.fi</a>
+            </p>
+        </div>
+    </div>
+    <!-- /CONTACT -->
+
+    <footer>
+        <div class="container">
+            &copy; Joona Somerkivi 2014
+        </div>
+    </footer>
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-2.1.1.min.js"></script>
