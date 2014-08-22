@@ -1,0 +1,13 @@
+.output {
+    font-family: "Lucida Console", Monaco, monospace;
+    background-color: black;
+    color: #ffff00;
+}
+
+.red {
+    color: orangered;
+}
+
+.container {
+    margin-bottom: 20px;
+}

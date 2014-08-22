@@ -6,7 +6,7 @@ a {
 
 footer {
     padding-top: 50px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     background-color: #380B61;
     color: #f5f5f5;
 }
@@ -36,24 +36,33 @@ div.category {
     color: greenyellow;
 }
 
+#who img
+{
+    border: 10px greenyellow solid;
+    border-radius: 30px;
+}
+.category h1{
+    padding-top: 45px;
+}
 .category p {
     font-size: 1.5em;
 }
+.category b{
+    font-weight: bolder;
+}
+
 .jumbotron b{
     color: greenyellow;
 }
-.category b{
-    font-weight: bolder;
+
+.jumbotron li{
+    font-size: 1.5em;
 }
 
 .project {
     padding: 10px 100px;
     text-align: center;
     margin-top: 20px;
-}
-
-.jumbotron li{
-    font-size: 1.5em;
 }
 
 p.social i.fa{
