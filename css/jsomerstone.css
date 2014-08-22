@@ -29,22 +29,20 @@ div.category {
     background-color: #2ECCFA;
 }
 #projects {
-    background-color: ghostwhite;
+    background-color: #E6E6E6;
 }
 
 #jsomerstone {
     color: greenyellow;
 }
-span.hi {
-    color: greenyellow;
-    font-weight: bolder;
-}
 
 .category p {
     font-size: 1.5em;
 }
-.category b{
+.jumbotron b{
     color: greenyellow;
+}
+.category b{
     font-weight: bolder;
 }
 
@@ -52,6 +50,10 @@ span.hi {
     padding: 10px 100px;
     text-align: center;
     margin-top: 20px;
+}
+
+.jumbotron li{
+    font-size: 1.5em;
 }
 
 p.social i.fa{
