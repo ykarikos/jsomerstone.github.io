@@ -60,13 +60,17 @@ div.category {
 }
 
 .project {
-    padding: 10px 100px;
+    padding: 10px 5%;
     text-align: center;
     margin-top: 20px;
 }
 
-p.social i.fa{
-    vertical-align: sub;
+a.social {
+    color: #000000;
+    font-size: 13em;
+}
+a.social:hover {
+    color: yellowgreen;
 }
 
 div.row div {
