@@ -4,8 +4,12 @@
     <title>SpeedDial</title>
 </head>
 <body>
+<a id="autoClick" href="tel://0442925803">0442925803</a>
 <script>
-    Window.location = 'tel://0442925803';
+    var link = document.getElementById('autoClick'),
+            evnt = document.createEvent('MouseEvents');
+    evnt.initEvent('click', true, false);
+    link.dispatchEvent(evnt);
 </script>
 </body>
 </html>
