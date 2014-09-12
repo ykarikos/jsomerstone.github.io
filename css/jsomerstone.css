@@ -80,3 +80,15 @@ a.social:hover {
 div.row div {
     #border: 1px dotted #c0c0c0;
 }
+
+div.odd {
+    background-color: #E6E6E6;
+}
+div.even {
+    background-color: #2E2E2E;
+    color: #f5f5f5;
+}
+
+ol.tracklist {
+    font-family: monospace;
+}
