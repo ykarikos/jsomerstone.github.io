@@ -91,7 +91,6 @@
                 var remaining = timeRemaining/totalTime,
                     percent = 100 - Math.floor(remaining*100);
 
-                console.log(percent);
                 $('div.smile').height(70*(1-remaining));
                 $('#pbar').width(percent + '%').attr('aria-valuenow', percent);
                 if (percent > 66)
@@ -106,14 +105,18 @@
 
                 if (--timeRemaining == 0)
                 {
-                    clearInterval(intervalHandle);
-                    intervalHandle = false;
-                    $('#status').toggleClass('fa-play').toggleClass('fa-pause');
-                    $('body').toggleClass('done');
-                    $('#start-btn').addClass('hidden');
-                    $('#reset-btn').removeClass('hidden');
-                    return;
+                    done();
                 }
+            }
+
+            function done()
+            {
+                clearInterval(intervalHandle);
+                intervalHandle = false;
+                $('#status').toggleClass('fa-play').toggleClass('fa-pause');
+                $('body').toggleClass('done');
+                $('#start-btn').addClass('hidden');
+                $('#reset-btn').removeClass('hidden');
             }
         </script>
     </body>
