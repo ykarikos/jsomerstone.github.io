@@ -96,3 +96,7 @@ div.trophy{
     font-size: 3em;
     padding-left: 20px;
 }
+
+#pbar {
+    min-width: 2px;
+}
