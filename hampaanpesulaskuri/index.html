@@ -89,7 +89,7 @@
             function tick()
             {
                 var remaining = timeRemaining/totalTime,
-                    percent = 105 - Math.floor(remaining*100);
+                    percent = 100 - Math.floor(remaining*100);
 
                 console.log(percent);
                 $('div.smile').height(70*(1-remaining));
