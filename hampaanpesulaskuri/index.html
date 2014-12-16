@@ -32,8 +32,8 @@
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="progress">
-                        <div id="pbar" class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                            <span id="counter">2:00</span>
+                        <div id="pbar" class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
                     <button class="btn btn-lg btn-primary paused btn-block" id="start-btn">
-                        <i class="fa fa-3x fa-play" id="status"></i>
+                        <i class="fa fa-3x fa-play" id="status"></i> <span id="counter">2:00</span>
                     </button>
                     <button class="btn btn-lg btn-warning hidden btn-block" id="reset-btn">
                         <i class="fa fa-3x fa-refresh"></i>
@@ -112,8 +112,8 @@
 
                 $('div.smile').height(70*(1-remaining));
                 $('#pbar')
-                    .width(percent < pbarLimit ? pbarLimit+'%' : percent+'%')
-                    .attr('aria-valuenow', percent < pbarLimit ? pbarLimit : percent);
+                    .width( percent+'%')
+                    .attr('aria-valuenow', percent);
                 $('#counter').html(minutes + ':' + seconds);
                 if (percent > 66)
                 {
@@ -132,6 +132,10 @@
                 }
             }
 
+            $('#trophy').click(function()
+            {
+                $('#trophy').modal('hide');
+            })
             function done()
             {
                 clearInterval(intervalHandle);

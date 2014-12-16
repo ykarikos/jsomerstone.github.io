@@ -91,3 +91,8 @@ div.trophy{
     width: 25%;
     font-size: 10em;
 }
+
+#counter {
+    font-size: 3em;
+    padding-left: 20px;
+}
