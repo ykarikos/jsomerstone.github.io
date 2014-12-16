@@ -86,3 +86,8 @@ body.done {
     background-color: green;
 }
 
+div.trophy{
+    margin: 185px auto;
+    width: 25%;
+    font-size: 10em;
+}

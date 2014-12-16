@@ -22,29 +22,42 @@
 
         <div class="container" style="margin-top: 90px;">
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-                    <div class="smileyface">
+                    <div class="smileyface center-block">
                         <p class="eyes lefteye"></p>
                         <p class="eyes righteye"></p>
                         <div class="smile">
                         </div>
                     </div>
-                </div>
             </div>
             <div class="row">
-                <div class="progress">
-                    <div id="pbar" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="0" style="width: 0%;">
-                        <span class="sr-only">60% Complete</span>
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="progress">
+                        <div id="pbar" class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
+                            <span id="counter">2:00</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <button class="col-xs-12 col-sm-4 col-sm-offset-3 btn btn-lg btn-primary paused" id="start-btn">
-                    <i class="fa fa-3x fa-play" id="status"></i>
-                </button>
-                <button class="col-xs-12 col-sm-4 col-sm-offset-3 btn btn-lg btn-warning hidden" id="reset-btn">
-                    <i class="fa fa-3x fa-refresh"></i>
-                </button>
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                    <button class="btn btn-lg btn-primary paused btn-block" id="start-btn">
+                        <i class="fa fa-3x fa-play" id="status"></i>
+                    </button>
+                    <button class="btn btn-lg btn-warning hidden btn-block" id="reset-btn">
+                        <i class="fa fa-3x fa-refresh"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="trophy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="trophy">
+                            <i class="fa fa-thumbs-o-up"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -74,9 +87,11 @@
             function start()
             {
                 intervalHandle = setInterval(tick, 1000);
+                $('#pbar').addClass('active');
             }
             function pause()
             {
+                $('#pbar').removeClass('active');
                 clearInterval(intervalHandle);
                 intervalHandle = false;
             }
@@ -88,11 +103,18 @@
 
             function tick()
             {
+                timeRemaining--;
                 var remaining = timeRemaining/totalTime,
-                    percent = 100 - Math.floor(remaining*100);
+                    percent = 100 - Math.floor(remaining*100),
+                    minutes = Math.floor(timeRemaining/60),
+                    seconds = (timeRemaining % 60) < 10 ? '0' + (timeRemaining % 60) : (timeRemaining % 60),
+                    pbarLimit = 5;
 
                 $('div.smile').height(70*(1-remaining));
-                $('#pbar').width(percent + '%').attr('aria-valuenow', percent);
+                $('#pbar')
+                    .width(percent < pbarLimit ? pbarLimit+'%' : percent+'%')
+                    .attr('aria-valuenow', percent < pbarLimit ? pbarLimit : percent);
+                $('#counter').html(minutes + ':' + seconds);
                 if (percent > 66)
                 {
                     $('#pbar').removeClass('progress-bar-warning')
@@ -103,8 +125,9 @@
                             .addClass('progress-bar-warning')
                 }
 
-                if (--timeRemaining == 0)
+                if (timeRemaining == 0)
                 {
+
                     done();
                 }
             }
@@ -114,10 +137,30 @@
                 clearInterval(intervalHandle);
                 intervalHandle = false;
                 $('#status').toggleClass('fa-play').toggleClass('fa-pause');
-                $('body').toggleClass('done');
+                $('body').addClass('done');
                 $('#start-btn').addClass('hidden');
                 $('#reset-btn').removeClass('hidden');
+                $.playSound('done');
+                $('#trophy').modal('show');
+                $('#pbar').removeClass('active')
+                        .removeClass('progress-bar-danger')
+                        .removeClass('progress-bar-warning')
+                        .removeClass('progress-bar-success')
+                        .addClass('progress-bar-default')
             }
+
+            (function($){
+
+                $.extend({
+                    playSound: function(name){
+                        return $(
+                            "<embed src='"+name+".mp3' hidden='true' autostart='true' loop='false' class='playSound' >"
+                            + "<audio autoplay='autoplay' style='display:none;' controls='controls' id='sound-" + name +"'><source src='"+name+".mp3' /><source src='"+name+".ogg' /></audio>"
+                        ).appendTo('body');
+                    }
+                });
+
+            })(jQuery);
         </script>
     </body>
 </html>
