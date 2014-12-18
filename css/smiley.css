@@ -96,7 +96,6 @@ div.corner.right {
 }
 #start-btn, #reset-btn {
     height: 100px;
-    z-index: 10;
 }
 button.paused {
     background-color: #428bca;
@@ -127,4 +126,5 @@ div.trophy{
     position: absolute;
     top: 0px;
     width: 100%;
+    z-index: -1;
 }
