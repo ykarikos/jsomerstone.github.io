@@ -72,36 +72,49 @@ function done()
 {
     clearInterval(intervalHandle);
     intervalHandle = false;
-    $('#status').toggleClass('fa-play').toggleClass('fa-pause');
-    $('body').addClass('done');
     $('#start-btn').addClass('hidden');
     $('#reset-btn').removeClass('hidden');
-    $.playSound('sound/done' + (Math.floor(Math.random()*14)+1));
     $('#pbar').removeClass('active');
-    var confettiEffect = new confetti.Context('confettiPlaceholder');
-    confettiEffect.start();
-    $(window).resize(function() {
-        confettiEffect.resize();
-    });
-    $('#confettiPlaceholder').removeClass('hidden');
+    playSound();
+    fireConfetti();
     openMouth();
 }
 
 function openMouth()
 {
     $('.smile').css('border', '5px solid #222');
-    $('.smile table').removeClass('hidden');
+    $('table.teeth').removeClass('hidden');
 }
 
-(function($){
+function playSound()
+{
+    fanfare.play();
+}
 
-    $.extend({
-        playSound: function(name){
-            return $(
-                "<embed src='"+name+".mp3' hidden='true' autostart='true' loop='false' class='playSound' >"
-                    + "<audio autoplay='autoplay' style='display:none;' controls='controls' id='sound-" + name +"'><source src='"+name+".mp3' /><source src='"+name+".ogg' /></audio>"
-            ).appendTo('body');
-        }
+function fireConfetti()
+{
+    $('#confettiPlaceholder').removeClass('hidden').addClass('done');
+    var confettiEffect = new confetti.Context('confettiPlaceholder');
+    confettiEffect.start();
+    $(window).resize(function() {
+        confettiEffect.resize();
     });
+}
 
-})(jQuery);
+var fanfare;
+
+soundManager.setup({
+    url: 'soundmanaager/',
+    flashVersion: 9, // optional: shiny features (default = 8)
+    // optional: ignore Flash where possible, use 100% HTML5 mode
+    preferFlash: false,
+    onready: function() {
+        fanfare = soundManager.createSound({
+            id: 'fanfare',
+            url: 'sound/done' + (Math.floor(Math.random()*14)+1) + '.ogg',
+            autoLoad: true,
+            autoPlay: false,
+            volume: 50
+        });
+    }
+});
