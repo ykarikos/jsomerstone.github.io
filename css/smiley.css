@@ -61,6 +61,7 @@ div.smile {
     border-collapse: separate;
     border-spacing: 0;
     background-color: #000000;
+    border-radius: 0px 0px 120px 120px / 0px 0px 90px 90px;
 }
 table.teeth td {
     width: 25px;

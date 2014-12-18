@@ -1,4 +1,4 @@
-var totalTime = 120, //time in seconds
+var totalTime = 10, //time in seconds
     timeRemaining = totalTime,
     intervalHandle = false;
 
