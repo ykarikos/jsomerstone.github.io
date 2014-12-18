@@ -118,3 +118,5 @@ soundManager.setup({
         });
     }
 });
+
+done();
