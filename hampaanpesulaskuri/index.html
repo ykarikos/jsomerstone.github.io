@@ -14,8 +14,27 @@
         <!-- NAVBAR -->
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <div class="navbar-header">
-                    <a class="navbar-brand" id="jsomerstone" href="#">Hampaanpesuaikalaskuri</a>
+                    <a class="navbar-brand" id="jsomerstone" href="#">
+                        <i class="fa fa-clock-o"></i>
+                         Hampaanpesuaikalaskuri
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../index.html"><i class="fa fa-home"></i> Etusivu</a></li>
+                        <li>
+                            <a href="#" title="Tietoja" id="aboutLink" data-toggle="modal" data-target="#aboutModal">
+                                <i class="fa fa-info-circle"></i> Tietoja
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div><!-- /NAVBAR -->
@@ -54,6 +73,51 @@
             </div>
         </div>
 
+        <div class="modal fade" id="aboutModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h4>Palasia</h4>
+                        <ul>
+                            <li>
+                                CSS-kirjasto:
+                                <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>
+                            </li>
+                            <li>
+                                JS-kirjasto:
+                                <a href="http://jquery.com/" target="_blank">jQuery</a>
+                            </li>
+                            <li>
+                                (alkuperäinen) Hymiö:
+                                <a href="http://bavotasan.com/2010/draw-smiley-face-css3/" target="_blank">C.Bavota</a>
+                            </li>
+                            <li>
+                                Konfetti-efekti:
+                                <a href="http://cssdeck.com/labs/ji9k8rnq" target="_blank">CssDesk | juangallegosnoya</a>
+                            </li>
+                            <li>
+                                Ääni-kirjasto:
+                                <a href="http://www.schillmania.com/projects/soundmanager2/" target="_blank">SoundMaster2</a>
+                            </li>
+                            <li>
+                               Äänet:
+                                <a href="http://soundjax.com/" target="_blank">SoundJax.com</a>
+                            </li>
+                            <li>
+                                Kuvakkeet:
+                                <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a>
+                            </li>
+                        </ul>
+                        <h4>Kokoaja</h4>
+                        <ul>
+                            <li>
+                                <a href="../index.html">JSomerstone</a> aka. Joona Somerkivi
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="../js/jquery-2.1.1.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
