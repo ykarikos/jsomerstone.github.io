@@ -35,6 +35,10 @@ function reset()
 
 function tick()
 {
+    if (timeRemaining == totalTime)
+    {
+        $('div.smile').height(0);
+    }
     timeRemaining--;
     var remaining = timeRemaining/totalTime,
         percent = 100 - Math.floor(remaining*100),
@@ -42,7 +46,7 @@ function tick()
         seconds = (timeRemaining % 60) < 10 ? '0' + (timeRemaining % 60) : (timeRemaining % 60),
         pbarLimit = 5;
 
-    $('div.smile').height(70*(1-remaining));
+    $('div.smile').height(60*(1-remaining));
     $('#pbar')
         .width( percent+'%')
         .attr('aria-valuenow', percent);
@@ -73,17 +77,20 @@ function done()
     $('#start-btn').addClass('hidden');
     $('#reset-btn').removeClass('hidden');
     $.playSound('sound/done' + (Math.floor(Math.random()*14)+1));
-    $('#pbar').removeClass('active')
-        .removeClass('progress-bar-danger')
-        .removeClass('progress-bar-warning')
-        .removeClass('progress-bar-success')
-        .addClass('progress-bar-default');
-    $('#confettiPlaceholder').removeClass('hidden');
+    $('#pbar').removeClass('active');
     var confettiEffect = new confetti.Context('confettiPlaceholder');
     confettiEffect.start();
     $(window).resize(function() {
         confettiEffect.resize();
     });
+    $('#confettiPlaceholder').removeClass('hidden');
+    openMouth();
+}
+
+function openMouth()
+{
+    $('.smile').css('border', '5px solid #222');
+    $('.smile table').removeClass('hidden');
 }
 
 (function($){
