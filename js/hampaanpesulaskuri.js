@@ -118,5 +118,3 @@ soundManager.setup({
         });
     }
 });
-
-done();

@@ -53,6 +53,7 @@ div.smile {
     -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.8);
     -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.8);
     overflow-x: hidden;
+    background-color: rgb(253, 252, 241);
 }
 .smile table.teeth {
     position: absolute;
