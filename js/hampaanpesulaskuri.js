@@ -82,7 +82,8 @@ function done()
 
 function openMouth()
 {
-    $('.smile').css('border', '5px solid #222');
+    $('.smile').css('border', '5px solid #222')
+        .css('background-color', 'rgb(253, 252, 241)');
     $('table.teeth').removeClass('hidden');
 }
 
