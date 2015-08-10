@@ -93,3 +93,22 @@ div.even {
 ol.tracklist {
     font-family: monospace;
 }
+
+input.player-name {
+    text-decoration: none;
+    background-color: inherit;
+    border: none;
+}
+
+div.first {
+    padding-top: 65px;
+}
+div.top-padding {
+    padding-top: 45px;
+    padding-bottom: 5px;
+}
+
+input.player-name:hover {
+    background-color: lightgoldenrodyellow;
+    cursor: text;
+}
