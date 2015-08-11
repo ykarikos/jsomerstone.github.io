@@ -1,4 +1,4 @@
-var config = {
+config = {
     'playerCount':2,
     'time': 30
 },
@@ -19,8 +19,10 @@ save = {
     turn: 0,
     current: 0,
     next: 1
-}
+},
 ongoing = false;
+
+
 function loadSettings()
 {
     if (localStorage.getObject('save'))
@@ -66,7 +68,7 @@ function drawProgressBar(player)
             + '<div class="form-group col-xs-2">'
                 + '<input id="name-' + player.n + '" value="' + player.name +'" type="text" class="player-name">'
             + '</div> <div class="progress">'
-                + '<div id="pbar-'+ player.n +'" class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" >'
+                + '<div id="pbar-'+ player.n +'" class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" >'
                     + '<span id="progress-'+ player.n +'">0:00</span>'
                 + '</div>'
             + '</div>'
@@ -85,6 +87,8 @@ function drawGameArea()
     {
         updateProgressBar(save.players[i]);
     }
+
+    $('#pbar-' + save.current).removeClass('progress-bar-warning').addClass('progress-bar-info');
 }
 
 function updateSettings()
@@ -132,7 +136,7 @@ function startTimer()
 
 function switchTimer()
 {
-    save.players[save.current].progress += (save.players[save.current].turnLength / 1000);
+    updateProgress();
     $('#pbar-' + save.current).removeClass('progress-bar-info active').addClass('progress-bar-warning');
     $('#pbar-' + save.next).removeClass('progress-bar-warning').addClass('progress-bar-info active');
 
@@ -145,13 +149,23 @@ function switchTimer()
 
     if (save.current == 0)
         save.turn++;
+
+    localStorage.setItem('save', save);
+}
+
+function updateProgress()
+{
+    save.players[save.current].progress += (save.players[save.current].turnLength / 1000);
+    save.players[save.current].turnLength = 0;
+    localStorage.setObject("save", save);
 }
 
 function stopTimer()
 {
-    clearInterval(save.interval);
-    $('#pbar-' + save.current).removeClass('active')
     ongoing = false;
+    clearInterval(save.interval);
+    updateProgress();
+    $('#pbar-' + save.current).removeClass('active')
     $('#update-btn').prop('disabled', false);
 }
 
