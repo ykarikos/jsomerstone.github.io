@@ -74,7 +74,7 @@ a.social {
     color: #000000;
     font-size: 7em;
 }
-a.social:hover {
+a.social:focus, a.social:hover {
     color: yellowgreen;
 }
 
@@ -108,7 +108,12 @@ div.top-padding {
     padding-bottom: 5px;
 }
 
-input.player-name:hover {
+input.player-name:hover, input.player-name:focus {
     background-color: lightgoldenrodyellow;
     cursor: text;
+}
+
+div.progress-bar {
+    min-width: 4em;
+    width: 4%;
 }

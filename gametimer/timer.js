@@ -20,18 +20,19 @@ save = {
     current: 0,
     next: 1
 },
-ongoing = false;
+game = {
+    ongoing: false,
+    interval: false
+};
 
 
 function loadSettings()
 {
-    if (localStorage.getObject('save'))
-        save = localStorage.getObject('save');
-
     if (localStorage.getObject('config'))
         config = localStorage.getObject('config');
 
-    console.log(save, config);
+    if (localStorage.getObject('save'))
+        save = localStorage.getObject('save');
 }
 
 $(document).ready(function(){
@@ -45,8 +46,8 @@ $(document).ready(function(){
    $('#time').blur(updateSettings).keyup(updateSettings);
    $('#stop-btn').click(stopTimer);
    $('#game-btn').click(startKeyPressed);
-
-    drawGameArea();
+   $('#reset-btn').click(resetProgress);
+    updateSettings();
 });
 
 function updateProgressBar(player)
@@ -60,6 +61,15 @@ function updateProgressBar(player)
     $('#name-' + player.n).val(player.name);
     $('#pbar-' + player.n).width(percent + '%').attr('aria-valuenow', percent);
     $('#progress-' + player.n).html(minutes+':'+seconds);
+}
+
+function nameChanged()
+{
+    for (var i = 0; i < save.players.length; i++)
+    {
+        save.players[i].name = $('#name-' + i).val();
+    }
+    localStorage.setItem('save', save);
 }
 
 function drawProgressBar(player)
@@ -89,6 +99,7 @@ function drawGameArea()
     }
 
     $('#pbar-' + save.current).removeClass('progress-bar-warning').addClass('progress-bar-info');
+    $('input.player-name').blur(nameChanged);
 }
 
 function updateSettings()
@@ -117,21 +128,22 @@ function updateSettings()
 
 function startKeyPressed()
 {
-    if ( ! ongoing)
+    if ( ! game.ongoing)
     {
         startTimer();
     } else {
+
         switchTimer();
     }
 }
 
 function startTimer()
 {
-    ongoing = true;
+    game.ongoing = true;
     $('#pbar-' + save.current).removeClass('progress-bar-warning').addClass('progress-bar-info active');
     save.players[save.current].turnStarted = new Date().getTime();
     save.players[save.current].turnLength = 0;
-    save.interval = setInterval(tick, 500);
+    game.interval = setInterval(tick, 500);
 }
 
 function switchTimer()
@@ -162,11 +174,24 @@ function updateProgress()
 
 function stopTimer()
 {
-    ongoing = false;
-    clearInterval(save.interval);
+    game.ongoing = false;
+    clearInterval(game.interval);
     updateProgress();
     $('#pbar-' + save.current).removeClass('active')
     $('#update-btn').prop('disabled', false);
+}
+
+function resetProgress()
+{
+    for (var i = 0; i < save.players.length; i++)
+    {
+        save.players[i].progress = 0;
+        save.players[i].turnLength = 0;
+        save.players[i].turnStarted = null;
+        save.current = 0;
+        updateProgressBar(save.players[i]);
+    }
+    stopTimer();
 }
 
 function tick()
@@ -178,8 +203,15 @@ function tick()
 
     player.turnLength = timePassed;
 
-    console.log(save);
-    updateProgressBar(save.players[save.current]);
+    if (player.progress + timePassed > maxTime)
+    {
+        $('#pbar-' + save.current)
+            .removeClass('active progress-bar-info progress-bar-striped')
+            .addClass('progress-bar-danger')
+
+    } else {
+        updateProgressBar(save.players[save.current]);
+    }
 }
 
 Storage.prototype.setObject = function(key, value) {
