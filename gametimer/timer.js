@@ -44,7 +44,7 @@ $(document).ready(function(){
    $('#update-btn').click(updateSettings);
    $('#playerCount').blur(updateSettings).keyup(updateSettings);
    $('#time').blur(updateSettings).keyup(updateSettings);
-   $('#stop-btn').click(stopTimer);
+   $('#stop-btn').click(pauseTimer);
    $('#game-btn').click(startKeyPressed);
    $('#reset-btn').click(resetProgress);
    $('#add-btn').click(addPlayer);
@@ -56,13 +56,13 @@ function nameChanged()
 {
     var playerNumber = $(this).attr('player-n')
     save.players[playerNumber].name = $(this).val()+'';
-    localStorage.setObject('save', save);
+    saveGame();
     console.log(save);
 }
 
 function drawProgressBar(player)
 {
-    return '<div class="row">'
+    return '<div class="row" id="row-' +player.n+ '">'
             + '<div class="form-group col-xs-2">'
                 + '<input id="name-' + player.n + '" value="' + player.name +'" player-n="' + player.n + '" type="text" class="player-name" >'
             + '</div> <div class="col-xs-9"> <div class="progress">'
@@ -97,8 +97,23 @@ function bindDynamicHandlers()
 {
     $('input.player-name').blur(nameChanged);
     $('a.rm-link').click(function(){
-        console.log($(this).attr('player-n'));
+        removePlayer($(this).attr('player-n'));
     });
+}
+
+function removePlayer(index)
+{
+    var player = save.players[index];
+    console.log('Removing ', player.name);
+    save.players.splice(index, 1);
+    config.playerCount = save.players.length;
+    for ( var n = index; n < save.players.length; n++)
+    {
+        console.log(save.players[n]);
+        save.players[n].n = n;
+    }
+    saveGame();
+    drawGameArea();
 }
 
 function updateSettings()
@@ -180,17 +195,18 @@ function updateProgressBar(player)
         ;
     console.log(timeRemaining, percent);
     $('#name-' + player.n).val(player.name);
-    if (timeRemaining == 0)
+    if (timeRemaining <= 0)
     {
         $('#pbar-' + player.n)
             .width('100%').attr('aria-valuenow', 100)
             .removeClass('active progress-bar-info progress-bar-striped')
             .addClass('progress-bar-danger');
+        $('#progress-' + player.n).html('-');
     } else {
         $('#pbar-' + player.n)
             .width(percent + '%').attr('aria-valuenow', percent);
+        $('#progress-' + player.n).html(minutes+':'+seconds);
     }
-    $('#progress-' + player.n).html(minutes+':'+seconds);
 }
 
 function switchTimer()
@@ -209,7 +225,7 @@ function switchTimer()
     if (save.current == 0)
         save.turn++;
 
-    localStorage.setObject('save', save);
+    saveGame();
 }
 
 function updateProgress()
@@ -219,7 +235,7 @@ function updateProgress()
     localStorage.setObject("save", save);
 }
 
-function stopTimer()
+function pauseTimer()
 {
     game.ongoing = false;
     clearInterval(game.interval);
@@ -230,7 +246,6 @@ function stopTimer()
 
 function resetProgress()
 {
-    showSettings();
     for (var i = 0; i < save.players.length; i++)
     {
         save.players[i].progress = 0;
@@ -239,7 +254,11 @@ function resetProgress()
         save.current = 0;
         updateProgressBar(save.players[i]);
     }
-    stopTimer();
+    pauseTimer();
+    save.current = 0;
+    save.next = 1;
+    saveGame();
+    showSettings();
 }
 
 function showSettings()
@@ -252,6 +271,12 @@ function hideSettings()
 {
     $('#settings-row').collapse('hide');
     $('a.rm-link').hide();
+}
+
+function saveGame()
+{
+    localStorage.setObject('save', save);
+    localStorage.setObject('config', config);
 }
 
 Storage.prototype.setObject = function(key, value) {
