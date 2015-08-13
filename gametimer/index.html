@@ -11,7 +11,7 @@
 </head>
 <body>
 <!-- NAVBAR -->
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="navbar navbar-inverse navbar-static-top" role="navigation">
     <div class="container">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -36,40 +36,46 @@
         </div>
     </div>
 </div><!-- /NAVBAR -->
-<div class="row even first">
-    <div class="container">
-        <form class="form-inline">
-            <b>Setup</b>
-            <div class="form-group">
-                <input type="number" class="form-control" id="playerCount" placeholder="2 .. 10" min="2" max="10" value="2">
-                <label for="playerCount">Players</label>
-            </div>
-            <div class="form-group">
-                <input type="number" class="form-control" id="time" placeholder="5 .. 120" min="5" max="120" step="5" value="30">
-                <label for="time">min each</label>
-            </div>
-            <div class="form-group">
-                <a href="#" class="btn btn-default" id="update-btn" title="Update settings"><i class="fa fa-repeat"></i></a>
-            </div>
-        </form>
-    </div>
-</div>
-<div class="row odd top-padding">
+<div class="row">
     <div class="container" id="step-2">
-        <div class="col-sm-offset-2 col-sm-8" id="progress-bars">
+        <div class="well well-sm">
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-8" id="progress-bars">
+            </div>
+        </div>
+        <div class="row collapse in" id="settings-row">
+            <div class="col-sm-offset-2 col-xs-2 col-sm-1">
+                <button id="add-btn" class="btn btn-sm btn-info" title="Add player">+ <i class="fa fa-user"></i></button>
+
+            </div>
+            <div class="col-xs-4">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="time" placeholder="5 .. 120" min="5" max="120" step="5" value="30">
+                            <div class="input-group-addon">min</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-offset-3 col-sm-6">
-                <button class="btn btn-block btn-success btn-lg" id="game-btn">Start</button>
+                <button class="btn btn-block btn-success btn-lg" id="game-btn"><i class="fa fa-play"></i> Start</button>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-offset-4 col-sm-2 col-xs-6">
-                <button class="btn btn-block btn-warning" id="stop-btn">Pause</button>
+                <button class="btn btn-block btn-warning" id="stop-btn">
+                    <i class="fa fa-pause"></i> Pause
+                </button>
             </div>
             <div class="col-sm-2 col-xs-6">
-                <button class="btn btn-block btn-danger col-sm-2" id="reset-btn">Reset</button>
+                <button class="btn btn-block btn-danger col-sm-2" id="reset-btn">
+                    <i class="fa fa-refresh"></i> Reset
+                </button>
             </div>
+        </div>
         </div>
     </div>
 </div>

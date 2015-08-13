@@ -114,6 +114,4 @@ input.player-name:hover, input.player-name:focus {
 }
 
 div.progress-bar {
-    min-width: 4em;
-    width: 4%;
 }

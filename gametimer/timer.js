@@ -28,10 +28,10 @@ game = {
 
 function loadSettings()
 {
-    if (localStorage.getObject('config'))
+    if ('config' in localStorage)
         config = localStorage.getObject('config');
 
-    if (localStorage.getObject('save'))
+    if ('save' in localStorage)
         save = localStorage.getObject('save');
 }
 
@@ -47,40 +47,31 @@ $(document).ready(function(){
    $('#stop-btn').click(stopTimer);
    $('#game-btn').click(startKeyPressed);
    $('#reset-btn').click(resetProgress);
+   $('#add-btn').click(addPlayer);
     updateSettings();
 });
 
-function updateProgressBar(player)
-{
-    var totalTime = 60*config.time,
-        timeSpent = Math.floor(player.progress + player.turnLength/1000),
-        percent = Math.floor(timeSpent / totalTime * 100),
-        minutes = Math.floor(timeSpent/60),
-        seconds = (timeSpent % 60) < 10 ? '0' + (timeSpent % 60) : (timeSpent % 60)
-        ;
-    $('#name-' + player.n).val(player.name);
-    $('#pbar-' + player.n).width(percent + '%').attr('aria-valuenow', percent);
-    $('#progress-' + player.n).html(minutes+':'+seconds);
-}
 
 function nameChanged()
 {
-    for (var i = 0; i < save.players.length; i++)
-    {
-        save.players[i].name = $('#name-' + i).val();
-    }
-    localStorage.setItem('save', save);
+    var playerNumber = $(this).attr('player-n')
+    save.players[playerNumber].name = $(this).val()+'';
+    localStorage.setObject('save', save);
+    console.log(save);
 }
 
 function drawProgressBar(player)
 {
     return '<div class="row">'
             + '<div class="form-group col-xs-2">'
-                + '<input id="name-' + player.n + '" value="' + player.name +'" type="text" class="player-name">'
-            + '</div> <div class="progress">'
+                + '<input id="name-' + player.n + '" value="' + player.name +'" player-n="' + player.n + '" type="text" class="player-name" >'
+            + '</div> <div class="col-xs-9"> <div class="progress">'
                 + '<div id="pbar-'+ player.n +'" class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" >'
-                    + '<span id="progress-'+ player.n +'">0:00</span>'
-                + '</div>'
+                    + '<span id="progress-'+ player.n +'"></span>'
+                + '</div></div>'
+            + '</div>'
+            + '<div class="col-xs-1">'
+                + '<a class="rm-link" href="#" title="Remove player" player-n="' + player.n + '"><i class="fa fa-trash-o"></i></a>'
             + '</div>'
         + '</div>';
 }
@@ -99,12 +90,19 @@ function drawGameArea()
     }
 
     $('#pbar-' + save.current).removeClass('progress-bar-warning').addClass('progress-bar-info');
+    bindDynamicHandlers();
+}
+
+function bindDynamicHandlers()
+{
     $('input.player-name').blur(nameChanged);
+    $('a.rm-link').click(function(){
+        console.log($(this).attr('player-n'));
+    });
 }
 
 function updateSettings()
 {
-    config.playerCount = $('#playerCount').val();
     config.time = $('#time').val();
 
     localStorage.setObject("config", config);
@@ -126,10 +124,18 @@ function updateSettings()
     drawGameArea();
 }
 
+function addPlayer()
+{
+    console.log('Adding player');
+    config.playerCount++;
+    updateSettings();
+}
+
 function startKeyPressed()
 {
     if ( ! game.ongoing)
     {
+        hideSettings();
         startTimer();
     } else {
 
@@ -139,11 +145,52 @@ function startKeyPressed()
 
 function startTimer()
 {
+    console.log('starting timer');
     game.ongoing = true;
+    $('#game-btn').html('<i class="fa fa-step-forward"></i> Next');
     $('#pbar-' + save.current).removeClass('progress-bar-warning').addClass('progress-bar-info active');
     save.players[save.current].turnStarted = new Date().getTime();
     save.players[save.current].turnLength = 0;
-    game.interval = setInterval(tick, 500);
+    game.interval = setInterval(tick, 1000);
+}
+
+function tick()
+{
+    var now = new Date().getTime(),
+        player = save.players[save.current],
+        timePassed = (now - player.turnStarted),
+        maxTime = config.time * 60 * 1000;
+
+    player.turnLength = timePassed;
+    if (player.progress + timePassed >= maxTime)
+    {
+        switchTimer();
+    }
+    updateProgressBar(player);
+}
+
+function updateProgressBar(player)
+{
+    var totalTime = 60*config.time,
+        timeSpent = Math.floor(player.progress + player.turnLength/1000),
+        timeRemaining = totalTime - timeSpent,
+        percent = Math.floor(timeSpent / totalTime * 100),
+        minutes = Math.floor(timeRemaining/60),
+        seconds = (timeRemaining % 60) < 10 ? '0' + (timeRemaining % 60) : (timeRemaining % 60)
+        ;
+    console.log(timeRemaining, percent);
+    $('#name-' + player.n).val(player.name);
+    if (timeRemaining == 0)
+    {
+        $('#pbar-' + player.n)
+            .width('100%').attr('aria-valuenow', 100)
+            .removeClass('active progress-bar-info progress-bar-striped')
+            .addClass('progress-bar-danger');
+    } else {
+        $('#pbar-' + player.n)
+            .width(percent + '%').attr('aria-valuenow', percent);
+    }
+    $('#progress-' + player.n).html(minutes+':'+seconds);
 }
 
 function switchTimer()
@@ -162,7 +209,7 @@ function switchTimer()
     if (save.current == 0)
         save.turn++;
 
-    localStorage.setItem('save', save);
+    localStorage.setObject('save', save);
 }
 
 function updateProgress()
@@ -178,11 +225,12 @@ function stopTimer()
     clearInterval(game.interval);
     updateProgress();
     $('#pbar-' + save.current).removeClass('active')
-    $('#update-btn').prop('disabled', false);
+    $('#game-btn').html('<i class="fa fa-play"></i> Start');
 }
 
 function resetProgress()
 {
+    showSettings();
     for (var i = 0; i < save.players.length; i++)
     {
         save.players[i].progress = 0;
@@ -194,24 +242,16 @@ function resetProgress()
     stopTimer();
 }
 
-function tick()
+function showSettings()
 {
-    var now = new Date().getTime(),
-        player = save.players[save.current],
-        timePassed = (now - player.turnStarted),
-        maxTime = config.time * 60;
+    $('#settings-row').collapse('show');
+    $('a.rm-link').show();
+}
 
-    player.turnLength = timePassed;
-
-    if (player.progress + timePassed > maxTime)
-    {
-        $('#pbar-' + save.current)
-            .removeClass('active progress-bar-info progress-bar-striped')
-            .addClass('progress-bar-danger')
-
-    } else {
-        updateProgressBar(save.players[save.current]);
-    }
+function hideSettings()
+{
+    $('#settings-row').collapse('hide');
+    $('a.rm-link').hide();
 }
 
 Storage.prototype.setObject = function(key, value) {
@@ -220,5 +260,6 @@ Storage.prototype.setObject = function(key, value) {
 
 Storage.prototype.getObject = function(key) {
     var value = this.getItem(key);
+    console.log(value);
     return value && JSON.parse(value);
 }
