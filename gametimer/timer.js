@@ -96,7 +96,7 @@ function drawGameArea()
 function bindDynamicHandlers()
 {
     $('input.player-name').blur(nameChanged);
-    $('a.rm-link').click(function(){
+    $('button.rm-btn').click(function(){
         removePlayer($(this).attr('player-n'));
     });
 }
