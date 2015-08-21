@@ -63,15 +63,15 @@ function nameChanged()
 function drawProgressBar(player)
 {
     return '<div class="row" id="row-' +player.n+ '">'
-            + '<div class="form-group col-xs-2">'
+            + '<div class="form-group col-xs-3">'
                 + '<input id="name-' + player.n + '" value="' + player.name +'" player-n="' + player.n + '" type="text" class="player-name" >'
-            + '</div> <div class="col-xs-9"> <div class="progress">'
+            + '</div> <div class="col-xs-7 bbar-container"> <div class="progress">'
                 + '<div id="pbar-'+ player.n +'" class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" >'
                     + '<span id="progress-'+ player.n +'"></span>'
                 + '</div></div>'
             + '</div>'
             + '<div class="col-xs-1">'
-                + '<a class="rm-link" href="#" title="Remove player" player-n="' + player.n + '"><i class="fa fa-trash-o"></i></a>'
+                + '<button class="btn btn-sm rm-btn" href="#" title="Remove player" player-n="' + player.n + '"><i class="fa fa-trash-o"></i></button>'
             + '</div>'
         + '</div>';
 }
@@ -174,14 +174,17 @@ function tick()
     var now = new Date().getTime(),
         player = save.players[save.current],
         timePassed = (now - player.turnStarted),
-        maxTime = config.time * 60 * 1000;
+        totalTime = 60*config.time,
+        timeSpent = Math.floor(player.progress + player.turnLength/1000),
+        timeRemaining = totalTime - timeSpent;
 
     player.turnLength = timePassed;
-    if (player.progress + timePassed >= maxTime)
+    updateProgressBar(player);
+
+    if (timeRemaining <= 0)
     {
         switchTimer();
     }
-    updateProgressBar(player);
 }
 
 function updateProgressBar(player)
@@ -193,7 +196,6 @@ function updateProgressBar(player)
         minutes = Math.floor(timeRemaining/60),
         seconds = (timeRemaining % 60) < 10 ? '0' + (timeRemaining % 60) : (timeRemaining % 60)
         ;
-    console.log(timeRemaining, percent);
     $('#name-' + player.n).val(player.name);
     if (timeRemaining <= 0)
     {
@@ -264,13 +266,13 @@ function resetProgress()
 function showSettings()
 {
     $('#settings-row').collapse('show');
-    $('a.rm-link').show();
+    $('button.rm-btn').show();
 }
 
 function hideSettings()
 {
     $('#settings-row').collapse('hide');
-    $('a.rm-link').hide();
+    $('button.rm-btn').hide();
 }
 
 function saveGame()

@@ -7,7 +7,7 @@
     <link href="../css/jsomerstone.css" rel="stylesheet">
     <meta charset="utf-8">
     <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
 <!-- NAVBAR -->
@@ -39,43 +39,46 @@
 <div class="row">
     <div class="container" id="step-2">
         <div class="well well-sm">
-        <div class="row">
-            <div class="col-sm-offset-2 col-sm-8" id="progress-bars">
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8" id="progress-bars">
+                </div>
             </div>
-        </div>
-        <div class="row collapse in" id="settings-row">
-            <div class="col-sm-offset-2 col-xs-2 col-sm-1">
-                <button id="add-btn" class="btn btn-sm btn-info" title="Add player">+ <i class="fa fa-user"></i></button>
+            <div class="row collapse in" id="settings-row">
+                <div class="col-sm-offset-2 col-xs-2 col-sm-2 col-md-2">
+                    <button id="add-btn" class="btn btn-sm btn-info" title="Add player">
+                        + <i class="fa fa-user"></i>
+                        <span class="hidden-xs"> Add player</span>
+                    </button>
 
-            </div>
-            <div class="col-xs-4">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="number" class="form-control" id="time" placeholder="5 .. 120" min="5" max="120" step="5" value="30">
-                            <div class="input-group-addon">min</div>
+                </div>
+                <div class="col-xs-5 col-md-4">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="time" min="5" max="120" step="5" value="30">
+                                <div class="input-group-addon">min</div>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-offset-3 col-sm-6">
-                <button class="btn btn-block btn-success btn-lg" id="game-btn"><i class="fa fa-play"></i> Start</button>
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <button class="btn btn-block btn-success btn-lg" id="game-btn"><i class="fa fa-play"></i> Start</button>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-offset-4 col-sm-2 col-xs-6">
-                <button class="btn btn-block btn-warning" id="stop-btn">
-                    <i class="fa fa-pause"></i> Pause
-                </button>
+            <div class="row">
+                <div class="col-sm-offset-4 col-sm-2 col-xs-6">
+                    <button class="btn btn-block btn-warning" id="stop-btn">
+                        <i class="fa fa-pause"></i> Pause
+                    </button>
+                </div>
+                <div class="col-sm-2 col-xs-6">
+                    <button class="btn btn-block btn-danger col-sm-2" id="reset-btn">
+                        <i class="fa fa-refresh"></i> Reset
+                    </button>
+                </div>
             </div>
-            <div class="col-sm-2 col-xs-6">
-                <button class="btn btn-block btn-danger col-sm-2" id="reset-btn">
-                    <i class="fa fa-refresh"></i> Reset
-                </button>
-            </div>
-        </div>
         </div>
     </div>
 </div>
