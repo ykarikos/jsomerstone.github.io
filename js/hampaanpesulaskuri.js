@@ -2,20 +2,20 @@ var totalTime = 120, //time in seconds
     timeRemaining = totalTime,
     intervalHandle = false;
 
-$('#start-btn').click(
-    function()
-    {
+$( document ).ready(function() {
+  $('#start-btn').click(function() {
         $('#status').toggleClass('fa-play').toggleClass('fa-pause');
-        if ( ! intervalHandle)
-        {
+        if ( ! intervalHandle) {
             start();
         } else {
             pause();
         }
     }
-);
+  );
 
-$('#reset-btn').click(reset);
+  $('#reset-btn').click(reset);
+});
+
 function start()
 {
     intervalHandle = setInterval(tick, 1000);
@@ -63,7 +63,6 @@ function tick()
 
     if (timeRemaining == 0)
     {
-
         done();
     }
 }
@@ -89,7 +88,21 @@ function openMouth()
 
 function playSound()
 {
-    fanfare.play();
+    var a = new Audio();
+    a.autoplay = true;
+    var audiofilename = 'sound/done' + (Math.floor(Math.random()*14)+1);
+
+    if (a.canPlayType("audio/mp3")) {
+        a.src = audiofilename + ".mp3";
+        a.load();
+        a.play();
+    } else if(a.canPlayType("audio/ogg; codec=vorbis")) {
+        a.src = audiofilename + ".ogg";
+        a.load();
+        a.play();
+    } else {
+        console.log("audio not supported");
+    }
 }
 
 function fireConfetti()
@@ -101,21 +114,3 @@ function fireConfetti()
         confettiEffect.resize();
     });
 }
-
-var fanfare;
-
-soundManager.setup({
-    url: 'soundmanager/',
-    flashVersion: 9, // optional: shiny features (default = 8)
-    // optional: ignore Flash where possible, use 100% HTML5 mode
-    preferFlash: false,
-    onready: function() {
-        fanfare = soundManager.createSound({
-            id: 'fanfare',
-            url: 'sound/done' + (Math.floor(Math.random()*14)+1) + '.ogg',
-            autoLoad: true,
-            autoPlay: false,
-            volume: 50
-        });
-    }
-});
