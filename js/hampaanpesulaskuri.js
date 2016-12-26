@@ -1,6 +1,8 @@
 var totalTime = 120, //time in seconds
-    timeRemaining = totalTime,
-    intervalHandle = false;
+    timeRemainingMS = totalTime * 1000,
+    tickMS = 100,
+    intervalHandle = false,
+    sound = initSound();
 
 $( document ).ready(function() {
   $('#start-btn').click(function() {
@@ -16,16 +18,17 @@ $( document ).ready(function() {
   $('#reset-btn').click(reset);
 });
 
-function start()
-{
-    intervalHandle = setInterval(tick, 1000);
+function start() {
+    intervalHandle = setInterval(tick, tickMS);
     $('#pbar').addClass('active');
+    sound.play();
 }
-function pause()
-{
+
+function pause() {
     $('#pbar').removeClass('active');
     clearInterval(intervalHandle);
     intervalHandle = false;
+    sound.pause();
 }
 
 function reset()
@@ -33,14 +36,15 @@ function reset()
     location.reload();
 }
 
-function tick()
-{
-    if (timeRemaining == totalTime)
+function tick() {
+    if (timeRemainingMS == (totalTime*1000))
     {
         $('div.smile').height(0);
     }
-    timeRemaining--;
-    var remaining = timeRemaining/totalTime,
+    timeRemainingMS -= tickMS;
+    var timeRemaining = Math.ceil(timeRemainingMS / 1000);
+
+    var remaining = timeRemaining / totalTime,
         percent = 100 - Math.floor(remaining*100),
         minutes = Math.floor(timeRemaining/60),
         seconds = (timeRemaining % 60) < 10 ? '0' + (timeRemaining % 60) : (timeRemaining % 60),
@@ -61,7 +65,7 @@ function tick()
             .addClass('progress-bar-warning')
     }
 
-    if (timeRemaining == 0)
+    if (timeRemaining == 0) 
     {
         done();
     }
@@ -74,7 +78,6 @@ function done()
     $('#start-btn').addClass('hidden');
     $('#reset-btn').removeClass('hidden');
     $('#pbar').removeClass('active');
-    playSound();
     fireConfetti();
     openMouth();
 }
@@ -86,23 +89,22 @@ function openMouth()
     $('table.teeth').removeClass('hidden');
 }
 
-function playSound()
-{
+function initSound() {
     var a = new Audio();
-    a.autoplay = true;
-    var audiofilename = 'sound/done' + (Math.floor(Math.random()*14)+1);
+    a.autoplay = false;
+//    var audiofilename = 'sound/done' + (Math.floor(Math.random()*14)+1);
+    var audiofilename = 'sound/done1';
 
     if (a.canPlayType("audio/mp3")) {
         a.src = audiofilename + ".mp3";
         a.load();
-        a.play();
     } else if(a.canPlayType("audio/ogg; codec=vorbis")) {
         a.src = audiofilename + ".ogg";
         a.load();
-        a.play();
     } else {
         console.log("audio not supported");
     }
+    return a;
 }
 
 function fireConfetti()
